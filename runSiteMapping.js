@@ -1,5 +1,6 @@
 const updateSiteMapping = require('./src/updateSiteMapping');
 
-(function() {
+(async function() {
     await updateSiteMapping();
+    process.exit(0);
 })();

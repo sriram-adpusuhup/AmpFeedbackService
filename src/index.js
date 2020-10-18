@@ -13,10 +13,10 @@ const utils = require('./utils');
 const app = express();
 
 const loadCookie = fs.readFileSync(
-  path.join(__dirname, "assets", "load-cookie.html")
+  path.join(__dirname, '..' ,"assets", "load-cookie.html")
 );
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   res.setHeader("Content-Type", "text/html");
   // must not cache load cookie, so that we capture all requests
   res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");

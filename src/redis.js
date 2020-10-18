@@ -3,23 +3,28 @@ const { promisify } = require("util");
 
 const Redis = {
   connect: function () {
-    if (!this.client) {
-      this.client = redis.createClient({
-        host: process.env.REDIS_HOST,
-        port: process.env.REDIS_PORT,
-      });
-      this.client.get = promisify(this.client.get);
-    }
+    return new Promise((resolve, reject) => {
+      if (!this.client) {
+        this.client = redis.createClient({
+          host: process.env.REDIS_HOST,
+          port: process.env.REDIS_PORT,
+        });
+        this.client.get = promisify(this.client.get);
+      }
+      return resolve(this.client);
+    });
   },
   setData: function (key, data, expiry) {
-    if (expiry) {
-      this.client.set(key, data, "EX", expiry);
-    } else {
-      this.client.set(key, data);
-    }
+    return this.connect().then(client => {
+      if (expiry) {
+        client.set(key, data, "EX", expiry);
+      } else {
+        client.set(key, data);
+      }
+    });
   },
   getData: function (key) {
-    return this.client.get(key);
+    return this.connect().then(client => client.get(key));
   },  
 };
 
