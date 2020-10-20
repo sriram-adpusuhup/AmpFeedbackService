@@ -1,6 +1,7 @@
-const couchbase = require("./couchbase");
-const utils = require("./utils");
-const redis = require("./redis");
+const couchbase = require("../utils/couchbase");
+const utils = require("../utils/utils");
+const redis = require("../utils/redis");
+const constants = require('../utils/constants');
 
 const getSiteMappingWithDomain = async () => {
   const query =
@@ -25,7 +26,7 @@ const updateSiteMappings = async () => {
     };
   }, {});
 
-  redis.setData("siteMapping", JSON.stringify(domainSiteMap));
+  redis.setData(constants.SITE_MAPPING_KEY, JSON.stringify(domainSiteMap));
 };
 
 module.exports = updateSiteMappings;

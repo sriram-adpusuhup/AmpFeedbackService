@@ -1,4 +1,4 @@
-const updateSiteMapping = require('./src/updateSiteMapping');
+const updateSiteMapping = require('../services/updateSiteMapping');
 
 (async function() {
     await updateSiteMapping();
