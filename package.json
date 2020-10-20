@@ -21,7 +21,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "schedule:siteMapping": "node src/services/schedule"
+    "schedule:siteMapping": "node src/services/schedule",
+    "start:prod": "pm2 start pm2-process.prod.json"
   },
   "devDependencies": {
     "nodemon": "^2.0.5"

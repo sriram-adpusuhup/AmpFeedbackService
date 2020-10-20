@@ -1,13 +1,33 @@
 {
     "apps": [
         {
+            "name": "MockFeedbackWebService",
+            "script": "src/mocks/index.js",
+            "log_date_format": "YYYY-MM-DD HH:mm Z",
+			"instances": "1",
+			"exec_mode": "fork_mode",
+			"env": {
+                "NODE_ENV": "dev",
+                "MOCK_API_PORT": 8081
+			},
+			"max_memory_restart": "1G" 
+        },
+        {
             "name": "AmpFeedbackApi",
             "script": "app.js",
             "log_date_format": "YYYY-MM-DD HH:mm Z",
 			"instances": "1",
 			"exec_mode": "fork_mode",
 			"env": {
-				"NODE_ENV": "dev"
+                "NODE_ENV": "dev",
+                "PORT": 8080,
+                "AP_FEEDBACK_URL": "http://localhost:8081/",
+                "REDIS_HOST": "127.0.0.1",
+                "REDIS_PORT": "6379",
+                "COUCHBASE_HOST": "127.0.0.1",
+                "COUCHBASE_USERNAME": "Admin",
+                "COUCHBASE_PASSWORD": "asd12345",
+                "COUCHBASE_BUCKET": "StoredRequestsBucket"
 			},
 			"max_memory_restart": "1G"
         },
@@ -18,7 +38,10 @@
 			"instances": "1",
 			"exec_mode": "fork_mode",
 			"env": {
-				"NODE_ENV": "dev"
+                "NODE_ENV": "dev",
+                "REDIS_HOST": "127.0.0.1",
+                "REDIS_PORT": "6379",
+                "SITE_MAPPING_UPDATE_CRON": "* * * * *"
 			},
 			"max_memory_restart": "1G"
         }

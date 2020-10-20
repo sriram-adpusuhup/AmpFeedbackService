@@ -1,4 +1,4 @@
-const SITE_MAPPING_KEY = 'siteMappings';
+const SITE_MAPPING_KEY = 'siteMapping';
 const DEVICE_TYPES = {
     DESKTOP: 'DESKTOP',
     MOBILE: 'MOBILE',
